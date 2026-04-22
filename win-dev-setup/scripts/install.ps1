@@ -22,7 +22,7 @@ function Install-Winget {
 
 Write-Host "=== 必装依赖 ===" -ForegroundColor Green
 $required = @(
-  @{ Id = 'wez.wezterm';                   Name = 'WezTerm' },
+  @{ Id = 'wez.wezterm.nightly';          Name = 'WezTerm (nightly)' },
   @{ Id = 'Microsoft.PowerShell.Preview';  Name = 'PowerShell 7 Preview' },
   @{ Id = 'Neovim.Neovim';                 Name = 'Neovim' },
   @{ Id = 'sxyazi.yazi';                   Name = 'Yazi' },

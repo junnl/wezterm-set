@@ -17,7 +17,6 @@ fi
 
 echo "=== 必装依赖 ==="
 brew install \
-  wezterm \
   neovim \
   yazi \
   starship \
@@ -33,9 +32,13 @@ brew install \
   sevenzip \
   font-jetbrains-mono
 
+# WezTerm nightly（稳定版更新慢，用 nightly）
+echo ""
+echo "=== WezTerm nightly ==="
+brew install --cask wezterm@nightly
+
 echo ""
 echo "=== 可选依赖 ==="
-brew install --cask wezterm 2>/dev/null || true   # cask 版 GUI 应用
 brew install imagemagick chafa zoxide || true
 
 # 字体（如果 cask 源报错，忽略即可）

@@ -9,7 +9,7 @@
 
 ## 共同特性
 
-- **WezTerm** 终端 — Catppuccin Mocha 主题，状态栏显示 Git 分支和时钟
+- **WezTerm** 终端（nightly） — Catppuccin Mocha 主题，状态栏显示 Git 分支和时钟。用 nightly 是因为稳定版更新太慢。
 - **HUAHUANVIM** Neovim 配置 — LSP / treesitter / cmp / nvim-tree / aerial
 - **Yazi** 文件浏览器 — Git 状态图标，回车 nvim 打开，`y` 函数退出时自动 cd
 - **Starship** 提示符 — 显示 Git 分支、Node / Python / Rust 版本等
