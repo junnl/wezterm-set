@@ -1,0 +1,8 @@
+# Yazi 插件清单
+# 用 `ya pkg upgrade` 同步到本地
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+
+[flavor]
+deps = []

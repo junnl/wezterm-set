@@ -1,0 +1,7 @@
+"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+
+[mgr]
+prepend_keymap = [
+  # ! 在当前目录打开一个 shell（Windows 用 pwsh，macOS 用 zsh）
+  { on = [ "!" ], run = 'shell "$SHELL" --block --confirm', desc = "Open shell here" },
+]

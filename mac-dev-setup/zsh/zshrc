@@ -1,0 +1,73 @@
+# zshrc
+# 位置: ~/.zshrc
+# 重新加载: source ~/.zshrc  或  exec zsh
+
+# --- Homebrew（Apple Silicon 和 Intel 自适应） ---------------------------
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+# --- 历史记录 -----------------------------------------------------------
+export HISTFILE=~/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=10000
+setopt INC_APPEND_HISTORY SHARE_HISTORY HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE
+
+# --- 别名 ---------------------------------------------------------------
+if command -v eza >/dev/null 2>&1; then
+  alias ls='eza --icons --group-directories-first'
+  alias ll='eza -l --icons --group-directories-first --git'
+  alias la='eza -la --icons --group-directories-first --git'
+  alias lt='eza --tree --icons --level=2'
+fi
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias gs='git status'
+alias gd='git diff'
+alias gl='git log --oneline --graph --decorate -20'
+
+# --- yazi 集成：y 函数退出后自动 cd ------------------------------------
+function y() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  yazi "$@" --cwd-file="$tmp"
+  local cwd
+  if cwd="$(cat -- "$tmp")" && [[ -n "$cwd" && "$cwd" != "$PWD" ]]; then
+    builtin cd -- "$cwd"
+  fi
+  rm -f -- "$tmp"
+}
+
+# --- 编辑器 -------------------------------------------------------------
+export EDITOR=nvim
+export VISUAL=nvim
+
+# --- 代理函数（改成你的本地端口） --------------------------------------
+# Mac 上 Clash Verge 默认 7890；其他工具按实际改
+export _PROXY_HTTP="http://127.0.0.1:7890"
+export _PROXY_SOCKS="socks5://127.0.0.1:7890"
+
+proxy_on() {
+  export HTTP_PROXY="$_PROXY_HTTP"
+  export HTTPS_PROXY="$_PROXY_HTTP"
+  export ALL_PROXY="$_PROXY_SOCKS"
+  echo "proxy on  ($_PROXY_HTTP)"
+}
+proxy_off() {
+  unset HTTP_PROXY HTTPS_PROXY ALL_PROXY
+  echo "proxy off"
+}
+# 默认开启
+proxy_on >/dev/null
+
+# --- Starship 提示符 ---------------------------------------------------
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
+
+# --- zoxide（可选，z 命令） --------------------------------------------
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
